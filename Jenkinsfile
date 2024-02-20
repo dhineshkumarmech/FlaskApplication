@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'tomcat:latest'
-        APP_NAME = 'FlaskApplication'
+        APP_NAME = 'flask-app'
         DOCKER_HOST = 'tcp://localhost:2375'
     }
 
