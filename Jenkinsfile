@@ -31,7 +31,7 @@ pipeline {
         stage('Deploy to Tomcat in Docker') {
             steps {
                 script {
-                    bat "docker -H ${DOCKER_HOST} run -p 8080:8080 -d --name ${APP_NAME} ${APP_NAME}:latest"
+                    bat "docker -H ${DOCKER_HOST} run -p 9090:8080 -d --name ${APP_NAME} ${APP_NAME}:latest"
                 }
             }
         }
