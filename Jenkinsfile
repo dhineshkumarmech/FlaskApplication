@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'tomcat:latest'
-        APP_NAME = 'flask-app'
+        APP_NAME = 'FlaskTry'
         DOCKER_HOST = 'tcp://localhost:2375'
     }
 
@@ -16,14 +16,14 @@ pipeline {
 
         stage('Build Flask Application') {
             steps {
-                bat 'cd flask-app && pip install -r requirements.txt'
+                bat 'cd FlaskTry && pip install -r requirements.txt'
             }
         }
 
         stage('Build Docker Image') {
             steps {
                 script {
-                    bat "docker build -t ${APP_NAME}:latest .\\flask-app"
+                    bat "docker build -t ${APP_NAME}:latest .\\FlaskTry"
                 }
             }
         }
