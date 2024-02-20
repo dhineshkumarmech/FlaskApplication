@@ -3,21 +3,20 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'tomcat:latest'
-        APP_NAME = 'flask-app'
-        DOCKER_HOST = 'tcp://localhost:2375' // Assuming Docker is running on localhost
+        APP_NAME = 'FlaskApplication'
+        DOCKER_HOST = 'tcp://localhost:2375'
     }
 
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/your-repo/flask-app.git'
+                git 'https://github.com/dhineshkumarmech/FlaskApplication.git'
             }
         }
 
         stage('Build Flask Application') {
             steps {
                 bat 'cd flask-app && pip install -r requirements.txt'
-                // Any other necessary build steps
             }
         }
 
