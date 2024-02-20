@@ -39,8 +39,8 @@ pipeline {
         stage('Verify Deployment') {
             steps {
                 script {
-                    bat 'timeout /t 30' // Wait for the application to start
-                    bat 'docker ps' // Verify that the container is running
+                    bat 'timeout /t 30'
+                    bat 'docker ps'
                 }
             }
         }
