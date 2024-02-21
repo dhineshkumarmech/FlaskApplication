@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'python-flask-app'
+        TOMCAT_CONTAINER = 'tomcat'
+    }
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image for Flask application
+                    docker.build(DOCKER_IMAGE, '-f Dockerfile .')
+                }
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+            steps {
+                script {
+                    // Run Docker container for Flask application
+                    docker.image(DOCKER_IMAGE).withRun('-p 5000:5000') { c ->
+                        // Copy Flask application WAR file to Tomcat webapps directory
+                        docker.inside(TOMCAT_CONTAINER) {
+                            sh 'cp /path/to/flask_application.war /usr/local/tomcat/webapps'
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
