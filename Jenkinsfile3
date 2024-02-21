@@ -6,6 +6,10 @@ pipeline {
         TOMCAT_CONTAINER = 'tomcat'
     }
 
+tools {
+        maven 'MAVEN_HOME'
+    }
+
     stages {
         stage('Build WAR File') {
             steps {
