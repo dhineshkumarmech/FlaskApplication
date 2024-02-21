@@ -1,0 +1,33 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'python-flask-app'
+        TOMCAT_CONTAINER = 'tomcat'
+    }
+
+    stages {
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    // Build Docker image for Flask application
+                    docker.build(DOCKER_IMAGE, '-f Dockerfile .')
+                }
+            }
+        }
+
+        stage('Deploy to Tomcat') {
+    steps {
+        script {
+            // Stop the existing container if it's running
+            bat 'docker stop python-flask-app || true'
+            // Remove the existing container if it exists
+            bat 'docker rm python-flask-app || true'
+            // Run Docker container for Flask application
+            bat 'docker run -d -p 8080:8080 --name python-flask-app python-flask-app'
+        }
+    }
+}
+
+    }
+}
