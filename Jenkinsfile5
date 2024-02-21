@@ -21,7 +21,7 @@ pipeline {
                 script {
                     bat 'docker pull tomcat:latest'
                     bat 'docker rm -f python-flask-app || true'
-                   // bat 'docker run -d --name python-flask-app -p 8080:8080 tomcat:latest'
+                   // bat 'docker run -d --name tomcat_container -p 8080:8080 tomcat:latest'
                     docker.image(DOCKER_IMAGE).withRun('-p 8080:8080') { c ->
                         // Copy Flask application WAR file to Tomcat webapps directory
                         docker.inside(TOMCAT_CONTAINER) {
