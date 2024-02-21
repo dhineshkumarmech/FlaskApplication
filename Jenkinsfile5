@@ -19,7 +19,6 @@ pipeline {
         stage('Deploy to Tomcat') {
             steps {
                 script {
-                    docker pull tomcat:latest
                     docker rm -f tomcat_container || true
                     docker.image(DOCKER_IMAGE).withRun('-p 8080:8080') { c ->
                         // Copy Flask application WAR file to Tomcat webapps directory
