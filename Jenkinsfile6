@@ -1,0 +1,28 @@
+pipeline {
+    agent any
+
+    environment {
+        DOCKER_IMAGE = 'python-flask-app'
+        TOMCAT_IMAGE = 'tomcat:latest'
+    }
+
+    stages {
+        stage('Build Docker Images') {
+            steps {
+                script {
+                    docker.build(DOCKER_IMAGE, '-f Dockerfile .')
+                    docker.pull(TOMCAT_IMAGE)
+                }
+            }
+        }
+
+        stage('Deploy Containers') {
+            steps {
+                script {
+                    docker.run("-d --name flask_container -p 2020:2020 ${DOCKER_IMAGE}")
+                    docker.run("-d --name tomcat_container -p 8080:8080 ${TOMCAT_IMAGE}")
+                }
+            }
+        }
+    }
+}
