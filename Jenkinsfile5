@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = 'python-flask-app'
-        TOMCAT_CONTAINER = 'tomcat'
     }
 
     stages {
