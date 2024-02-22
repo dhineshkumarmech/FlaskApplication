@@ -23,7 +23,7 @@ pipeline {
                   bat 'docker run -d --name flask_container -p 2020:2020 tomcat:latest'
                   bat 'docker exec -d flask_container /usr/local/tomcat/bin/catalina.sh start'
                   bat 'docker rm -f tomcat_container || true'
-                  bat 'docker run -d --name tomcat_container -p 2020:2020 tomcat:latest'
+                  bat 'docker run -d --name tomcat_container -p 1010:1010 tomcat:latest'
                   bat 'docker exec -d tomcat_container /usr/local/tomcat/bin/catalina.sh start'
                 }
             }
