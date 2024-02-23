@@ -1,0 +1,37 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/dhineshkumarmech/FlaskApplication.git'
+            }
+        }
+        
+        stage('Build Docker Image') {
+            steps {
+                script {
+                    docker.build('flask-app-image')
+                }
+            }
+        }
+        
+        stage('Run Tests') {
+            steps {
+                bat 'python FlaskTry.py'
+            }
+        }
+        
+        stage('Deploy to Docker Container') {
+            steps {
+                script {
+                    docker.image('flask-app-image').stop()
+                    docker.image('flask-app-image').remove()
+                }
+                script {
+                    docker.run('-p 8080:8080 --name flask-app-container -d flask-app-image')
+                }
+            }
+        }
+    }
+}
