@@ -23,7 +23,7 @@ pipeline {
                     //docker.image('flask-app:latest').run('-d -p 8080:8080 tomcat:latest')
                     //docker.image(DOCKER_IMAGE).run('-d --name tomcat_container -p 8080:8080 tomcat:latest')
                     //bat 'docker exec -d tomcat_container /usr/local/tomcat/bin/catalina.sh start'
-                    bat 'docker run -p 5000:5000 $(DOCKER_IMAGE)'
+                    bat 'docker run -p 6000:6000 $(DOCKER_IMAGE)'
                 }
             }
         }
