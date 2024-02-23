@@ -17,12 +17,6 @@ pipeline {
         stage('Deploy to Docker Container') {
             steps {
                 script {
-                    //bat 'docker pull tomcat:latest'
-                    //bat 'docker rm -f tomcat_container || true'
-                    //bat 'docker run -d --name tomcat_container -p 8080:8080 tomcat:latest'
-                    //docker.image('flask-app:latest').run('-d -p 8080:8080 tomcat:latest')
-                    //docker.image(DOCKER_IMAGE).run('-d --name tomcat_container -p 8080:8080 tomcat:latest')
-                    //bat 'docker exec -d tomcat_container /usr/local/tomcat/bin/catalina.sh start'
                     bat 'docker rm -f python_flask_container || true'
                     bat 'docker run -d --name python_flask_container -p 5000:5000 python-flask'
                 }
